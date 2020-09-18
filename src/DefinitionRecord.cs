@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace FitReader
 {
     internal class DefinitionRecord
@@ -14,7 +16,7 @@ namespace FitReader
             this.reserved = binaryReader.ReadUInt8();
             this.architecture = binaryReader.ReadUInt8();
             bool littleEndian = this.architecture == 0;
-            this.globalMsgNum = binaryReader.ReadUInt16(littleEndian);
+            this.GlobalMsgNum = binaryReader.ReadUInt16(littleEndian);
             byte numFields = binaryReader.ReadUInt8();
 
             this.fieldDefinitions = new FieldDefinition[numFields];
@@ -23,5 +25,9 @@ namespace FitReader
                 this.fieldDefinitions[i] = new FieldDefinition(binaryReader);
             }
         }
+
+        public List<DataRecord> DataRecords { get; internal set; }
+        internal ushort GlobalMsgNum { get => globalMsgNum; set => globalMsgNum = value; }
+        internal FieldDefinition[] FieldDefinitions { get => fieldDefinitions; }
     }
 }
