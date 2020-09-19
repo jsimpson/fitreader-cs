@@ -4,7 +4,7 @@ namespace FitReader
 {
     internal static class Bits
     {
-        internal static IDictionary<long, long> Masks = new Dictionary<long, long>()
+        internal static Dictionary<long, long> Masks = new Dictionary<long, long>()
         {
             { 7, 0b10000000 },
             { 6, 0b01000000 },
