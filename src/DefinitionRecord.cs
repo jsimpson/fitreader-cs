@@ -27,6 +27,11 @@ namespace FitReader
             }
         }
 
+        internal bool isLittleEndian()
+        {
+            return this.architecture == 0;
+        }
+
         internal ushort GlobalMsgNum { get => globalMsgNum; set => globalMsgNum = value; }
         internal FieldDefinition[] FieldDefinitions { get => fieldDefinitions; }
     }

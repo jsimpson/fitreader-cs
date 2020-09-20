@@ -2,44 +2,8 @@ using System.Collections.Generic;
 
 namespace FitReader
 {
-    internal struct DataType
-    {
-        public bool endianAbility;
-        public byte baseFieldtype;
-        public string typeName;
-        public object invalidValue;
-        public byte size;
-
-        public DataType(bool endianAbility, byte baseFieldtype, string typeName, object invalidValue, byte size)
-        {
-            this.endianAbility = endianAbility;
-            this.baseFieldtype = baseFieldtype;
-            this.typeName = typeName;
-            this.invalidValue = invalidValue;
-            this.size = size;
-        }
-    }
-
     internal class DataField
     {
-        internal DataType[] types = new DataType[]
-        {
-            new DataType(false, 0x00, "enum",    (byte)   0xFF,               1),
-            new DataType(false, 0x01, "sint8",   (sbyte)  0x7F,               1),
-            new DataType(false, 0x02, "uint8",   (byte)   0xFF,               1),
-            new DataType(false, 0x83, "sint16",  (short)  0x7FFF,             2),
-            new DataType(false, 0x84, "uint16",  (ushort) 0xFFFF,             2),
-            new DataType(true,  0x85, "sint32",  (int)    0x7FFFFFFF,         4),
-            new DataType(true,  0x86, "uint32",  (uint)   0xFFFFFFFF,         4),
-            new DataType(false, 0x07, "string",  (byte)   0x00,               1),
-            new DataType(true,  0x88, "float32", (float)  0xFFFFFFFF,         4),
-            new DataType(true,  0x89, "float64", (double) 0xFFFFFFFFFFFFFFFF, 8),
-            new DataType(false, 0x0A, "uint8z",  (byte)   0x00,               1),
-            new DataType(true,  0x8B, "uint16z", (ushort) 0x0000,             2),
-            new DataType(true,  0x8C, "uint32z", (uint)   0x00000000,         4),
-            new DataType(false, 0x0D, "byte",    (byte)   0xFF,               1)
-        };
-
         internal bool valid = false;
         internal object data;
         public DataField(EndianBinaryReader binaryReader, Dictionary<string, byte> opts)
@@ -49,7 +13,7 @@ namespace FitReader
             var arch = opts["arch"];
             var littleEndian = arch == 1;
 
-            var baseType = types[baseNum];
+            var baseType = DataTypes.Types[baseNum];
             var multiples = size / baseType.size;
 
             // TODO: These types should be an enum.
@@ -95,13 +59,13 @@ namespace FitReader
                         var data = new ushort[multiples];
                         for (int i = 0; i < multiples; i++)
                         {
-                            data[i] = binaryReader.ReadUInt16();
+                            data[i] = binaryReader.ReadUInt16(littleEndian);
                         }
                         this.data = (object)data;
                     }
                     else
                     {
-                        this.data = binaryReader.ReadUInt16();
+                        this.data = binaryReader.ReadUInt16(littleEndian);
                     }
                     break;
                 case "sint16":
@@ -110,13 +74,13 @@ namespace FitReader
                         var data = new short[multiples];
                         for (int i = 0; i < multiples; i++)
                         {
-                            data[i] = binaryReader.ReadInt16();
+                            data[i] = binaryReader.ReadInt16(littleEndian);
                         }
                         this.data = (object)data;
                     }
                     else
                     {
-                        this.data = binaryReader.ReadInt16();
+                        this.data = binaryReader.ReadInt16(littleEndian);
                     }
                     break;
                 case "uint32":
@@ -126,13 +90,13 @@ namespace FitReader
                         var data = new uint[multiples];
                         for (int i = 0; i < multiples; i++)
                         {
-                            data[i] = binaryReader.ReadUInt32();
+                            data[i] = binaryReader.ReadUInt32(littleEndian);
                         }
                         this.data = (object)data;
                     }
                     else
                     {
-                        this.data = binaryReader.ReadUInt32();
+                        this.data = binaryReader.ReadUInt32(littleEndian);
                     }
                     break;
                 case "sint32":
@@ -141,13 +105,13 @@ namespace FitReader
                         var data = new int[multiples];
                         for (int i = 0; i < multiples; i++)
                         {
-                            data[i] = binaryReader.ReadInt32();
+                            data[i] = binaryReader.ReadInt32(littleEndian);
                         }
                         this.data = (object)data;
                     }
                     else
                     {
-                        this.data = binaryReader.ReadInt32();
+                        this.data = binaryReader.ReadInt32(littleEndian);
                     }
                     break;
                 case "float32":
@@ -156,13 +120,13 @@ namespace FitReader
                         var data = new float[multiples];
                         for (int i = 0; i < multiples; i++)
                         {
-                            data[i] = binaryReader.ReadFloat();
+                            data[i] = binaryReader.ReadFloat(littleEndian);
                         }
                         this.data = (object)data;
                     }
                     else
                     {
-                        this.data = binaryReader.ReadFloat();
+                        this.data = binaryReader.ReadFloat(littleEndian);
                     }
                     break;
                 case "float64":
@@ -171,13 +135,13 @@ namespace FitReader
                         var data = new double[multiples];
                         for (int i = 0; i < multiples; i++)
                         {
-                            data[i] = binaryReader.ReadFloat64();
+                            data[i] = binaryReader.ReadFloat64(littleEndian);
                         }
                         this.data = (object)data;
                     }
                     else
                     {
-                        this.data = binaryReader.ReadFloat64();
+                        this.data = binaryReader.ReadFloat64(littleEndian);
                     }
                     break;
                 case "uint64":
@@ -187,13 +151,13 @@ namespace FitReader
                         var data = new ulong[multiples];
                         for (int i = 0; i < multiples; i++)
                         {
-                            data[i] = binaryReader.ReadUInt64();
+                            data[i] = binaryReader.ReadUInt64(littleEndian);
                         }
                         this.data = (object)data;
                     }
                     else
                     {
-                        this.data = binaryReader.ReadUInt64();
+                        this.data = binaryReader.ReadUInt64(littleEndian);
                     }
                     break;
                 case "sint64":
@@ -202,13 +166,13 @@ namespace FitReader
                         var data = new long[multiples];
                         for (int i = 0; i < multiples; i++)
                         {
-                            data[i] = binaryReader.ReadInt64();
+                            data[i] = binaryReader.ReadInt64(littleEndian);
                         }
                         this.data = (object)data;
                     }
                     else
                     {
-                        this.data = binaryReader.ReadInt64();
+                        this.data = binaryReader.ReadInt64(littleEndian);
                     }
                     break;
                 case "string":
@@ -218,6 +182,37 @@ namespace FitReader
                     // TODO: This should never happen but we should also throw an exception..
                     break;
             }
+
+            this.valid = check(baseType.invalidValue);
+        }
+
+        private bool check(object invalidValue)
+        {
+            var name = this.data.GetType().Name;
+            if (name == "Byte[]" ||
+                name == "SByte[]" ||
+                name == "UShort[]" ||
+                name == "Short[]" ||
+                name == "UInt[]" ||
+                name == "Int[]" ||
+                name == "Single[]" ||
+                name == "Double[]" ||
+                name == "ULong[]" ||
+                name == "Long[]" ||
+                name == "Char[]"
+            )
+            {
+                // Is there a better way to handle this?
+                foreach(var d in (dynamic)this.data)
+                {
+                    if ((object)d != invalidValue)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return this.data != invalidValue;
         }
     }
 }

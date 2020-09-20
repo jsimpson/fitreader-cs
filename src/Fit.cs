@@ -1,4 +1,6 @@
-using System.Collections.Generic;
+using System;    
+using System.Collections.Generic;    
+using System.Linq;   
 
 namespace FitReader
 {
@@ -7,6 +9,7 @@ namespace FitReader
         internal List<DefinitionRecord> finished = new List<DefinitionRecord>();
         internal Dictionary<long, DefinitionRecord> definitions = new Dictionary<long, DefinitionRecord>();
         internal FileHeader fileHeader { get; }
+        public List<Message> messages { get; }
 
         public Fit(EndianBinaryReader binaryReader)
         {
@@ -30,20 +33,20 @@ namespace FitReader
                     DefinitionRecord definitionRecord = definitions[recordHeader.localMessageType];
                     DataRecord dataRecord = new DataRecord(binaryReader, definitionRecord);
 
+                    // 206 is developer field definitions, skip processing
                     if (definitionRecord.GlobalMsgNum != 206)
                     {
                         definitionRecord.dataRecords.Add(dataRecord);
                     }
-                    else
-                    {
-                        // dev field
-                    }
-                }
-                else
-                {
-                    // timestamp or...?
                 }
             }
+
+            foreach (var definition in definitions)
+            {
+                finished.Add(definition.Value);
+            }
+
+            var grouped = finished.GroupBy(definition => definition.GlobalMsgNum);
         }
     }
 }
