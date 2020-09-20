@@ -4,14 +4,12 @@ namespace FitReader
 {
     public class Fit
     {
-        internal List<DefinitionRecord> finished { get; }
-        internal Dictionary<long, DefinitionRecord> definitions { get; }
+        internal List<DefinitionRecord> finished = new List<DefinitionRecord>();
+        internal Dictionary<long, DefinitionRecord> definitions = new Dictionary<long, DefinitionRecord>();
         internal FileHeader fileHeader { get; }
 
         public Fit(EndianBinaryReader binaryReader)
         {
-            this.finished = new List<DefinitionRecord>();
-            this.definitions = new Dictionary<long, DefinitionRecord>();
             this.fileHeader = new FileHeader(binaryReader);
 
             while (binaryReader.Position < (this.fileHeader.dataSize + this.fileHeader.size))
@@ -34,7 +32,7 @@ namespace FitReader
 
                     if (definitionRecord.GlobalMsgNum != 206)
                     {
-                        definitionRecord.DataRecords.Add(dataRecord);
+                        definitionRecord.dataRecords.Add(dataRecord);
                     }
                     else
                     {

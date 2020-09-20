@@ -114,5 +114,77 @@ namespace FitReader
                 return BitConverter.ToUInt32(buf);
             }
         }
+
+        public long ReadInt64(bool isLittleEndian = false)
+        {
+            this.position += 8;
+
+            if (isLittleEndian)
+            {
+                return this.binaryReader.ReadInt64();
+            }
+            else
+            {
+                byte[] buf = new byte[8];
+                this.binaryReader.Read(buf, 0, 8);
+                Array.Reverse(buf);
+
+                return BitConverter.ToInt64(buf);
+            }
+        }
+
+        public ulong ReadUInt64(bool isLittleEndian = false)
+        {
+            this.position += 8;
+
+            if (isLittleEndian)
+            {
+                return this.binaryReader.ReadUInt64();
+            }
+            else
+            {
+                byte[] buf = new byte[8];
+                this.binaryReader.Read(buf, 0, 8);
+                Array.Reverse(buf);
+
+                return BitConverter.ToUInt64(buf);
+            }
+        }
+
+        public float ReadFloat(bool isLittleEndian = false)
+        {
+            this.position += 4;
+
+            if (isLittleEndian)
+            {
+                return this.binaryReader.ReadSingle();
+            }
+            else
+            {
+                byte[] buf = new byte[4];
+                this.binaryReader.Read(buf, 0, 4);
+                Array.Reverse(buf);
+
+                return BitConverter.ToSingle(buf);
+            }
+        }
+
+        public double ReadFloat64(bool isLittleEndian = false)
+        {
+            this.position += 8;
+
+            if (isLittleEndian)
+            {
+                return this.binaryReader.ReadDouble();
+            }
+            else
+            {
+                byte[] buf = new byte[8];
+                this.binaryReader.Read(buf, 0, 8);
+                Array.Reverse(buf);
+
+                return BitConverter.ToDouble(buf);
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace FitReader
         private byte architecture;
         private ushort globalMsgNum;
         private FieldDefinition[] fieldDefinitions;
+        public List<DataRecord> dataRecords = new List<DataRecord>();
 
         public DefinitionRecord(EndianBinaryReader binaryReader, int localNum)
         {
@@ -26,7 +27,6 @@ namespace FitReader
             }
         }
 
-        public List<DataRecord> DataRecords { get; internal set; }
         internal ushort GlobalMsgNum { get => globalMsgNum; set => globalMsgNum = value; }
         internal FieldDefinition[] FieldDefinitions { get => fieldDefinitions; }
     }

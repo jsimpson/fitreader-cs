@@ -14,7 +14,7 @@ namespace FitReader
 
             foreach(FieldDefinition fieldDefinition in definitionRecord.FieldDefinitions)
             {
-                var opts = new Dictionary<string, long>()
+                var opts = new Dictionary<string, byte>()
                 {
                     { "baseNum", fieldDefinition.baseNum },
                     { "size", fieldDefinition.size },
