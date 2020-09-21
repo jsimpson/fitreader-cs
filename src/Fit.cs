@@ -46,7 +46,23 @@ namespace FitReader
                 finished.Add(definition.Value);
             }
 
-            var grouped = finished.GroupBy(definition => definition.GlobalMsgNum);
+            var grouped = finished
+                .OrderBy(definition => definition.GlobalMsgNum)
+                .GroupBy(definition => definition.GlobalMsgNum)
+                .ToList();
+
+            this.messages = new List<Message>();
+            foreach (var group in grouped)
+            {
+                foreach (var d in group)
+                {
+                    var message = new Message(group.Key, d);
+                    if (message.Name != null)
+                    {
+                        this.messages.Add(message);
+                    }
+                }
+            }
         }
     }
 }
