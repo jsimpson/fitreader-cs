@@ -32,6 +32,25 @@ namespace FitReader
             return this.architecture == 0;
         }
 
+        internal List<DataRecord> valid()
+        {
+            var valid = new List<DataRecord>();
+
+            if (Fields._Fields.ContainsKey(this.globalMsgNum))
+            {
+                var fields = Fields._Fields[this.globalMsgNum];
+                foreach (var dataRecord in this.dataRecords)
+                {
+                    foreach (var dataFields in dataRecord.valid())
+                    {
+                        var a = 1;
+                    }
+                }
+            }
+
+            return valid;
+        }
+
         internal ushort GlobalMsgNum { get => globalMsgNum; set => globalMsgNum = value; }
         internal FieldDefinition[] FieldDefinitions { get => fieldDefinitions; }
     }

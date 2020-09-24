@@ -5,7 +5,7 @@ namespace FitReader
 {
     internal class DataRecord
     {
-        private long globalMsgNum;
+        internal ushort globalMsgNum;
         private List<Dictionary<byte, DataField>> fields;
         private List<Dictionary<byte, DataField>> devFields;
         public DataRecord(EndianBinaryReader binaryReader, DefinitionRecord definitionRecord)
@@ -26,6 +26,21 @@ namespace FitReader
                     { fieldDefinition.fieldDefNum, new DataField(binaryReader, opts) }
                 });
             }
+        }
+
+        internal List<Dictionary<byte, DataField>> valid()
+        {
+            var valid = new List<Dictionary<byte, DataField>>();
+
+            foreach(var field in fields)
+            {
+                if (field[1].valid)
+                {
+                   valid.Add(field) ;
+                }
+            }
+            
+            return valid;
         }
     }
 }

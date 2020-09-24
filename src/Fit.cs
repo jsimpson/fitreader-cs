@@ -7,9 +7,9 @@ namespace FitReader
     public class Fit
     {
         internal List<DefinitionRecord> finished = new List<DefinitionRecord>();
-        internal Dictionary<long, DefinitionRecord> definitions = new Dictionary<long, DefinitionRecord>();
+        internal Dictionary<ushort, DefinitionRecord> definitions = new Dictionary<ushort, DefinitionRecord>();
         internal FileHeader fileHeader { get; }
-        public List<Message> messages { get; }
+        internal List<Message> messages { get; } = new List<Message>();
 
         public Fit(EndianBinaryReader binaryReader)
         {
@@ -46,17 +46,26 @@ namespace FitReader
                 finished.Add(definition.Value);
             }
 
-            var grouped = finished
-                .OrderBy(definition => definition.GlobalMsgNum)
-                .GroupBy(definition => definition.GlobalMsgNum)
-                .ToList();
-
-            this.messages = new List<Message>();
-            foreach (var group in grouped)
+            var grouped = new SortedDictionary<ushort, List<DefinitionRecord>>();
+            foreach (DefinitionRecord definition in finished)
             {
-                foreach (var d in group)
+                if (!grouped.ContainsKey(definition.GlobalMsgNum))
                 {
-                    var message = new Message(group.Key, d);
+                    var list = new List<DefinitionRecord>();
+                    list.Add(definition);
+                    grouped.Add(definition.GlobalMsgNum, list);
+                }
+                else
+                {
+                    grouped[definition.GlobalMsgNum].Add(definition);
+                }
+            }
+
+            foreach (KeyValuePair<ushort, List<DefinitionRecord>> entry in grouped)
+            {
+                foreach (var definition in entry.Value)
+                {
+                    var message = new Message(entry.Key, definition);
                     if (message.Name != null)
                     {
                         this.messages.Add(message);
