@@ -366,7 +366,7 @@ namespace FitReader
                 }
             },
             { "enumBodyLocation", new Dictionary<ushort, string>()
-              {
+                {
                 { 0, "leftLeg" },
                 { 1, "leftCalf" },
                 { 2, "leftShin" },
@@ -540,25 +540,27 @@ namespace FitReader
                 { 128, "athlete" }
               }
             },
-  enumIntensity: {
-              new Dictionary<ushort, string>()
-    0: "active",
-    1: "rest",
-    2: "warmup",
-    3: "cooldown",
+  { "enumIntensity", new Dictionary<ushort, string>()
+  {
+    { 0, "active" },
+    { 1, "rest" },
+    { 2, "warmup" },
+    { 3, "cooldown" }
+  }
   },
-  enumLapTrigger: {
-              new Dictionary<ushort, string>()
-    0: "manual",
-    1: "time",
-    2: "distance",
-    3: "positionStart",
-    4: "positionLap",
-    5: "positionWaypoint",
-    6: "positionMarked",
-    7: "sessionEnd",
-    8: "fitnessEquipment",
-  },
+  { "enumLapTrigger", new Dictionary<ushort, string>()
+  {
+    { 0, "manual" },
+    { 1, "time" },
+    { 2, "distance" },
+    { 3, "positionStart" },
+    { 4, "positionLap" },
+    { 5, "positionWaypoint" },
+    { 6, "positionMarked" },
+    { 7, "sessionEnd" },
+    { 8, "fitnessEquipment" }
+  }
+        },
                   { "enumSport", new Dictionary<ushort, string>()
                     {
                       { 0, "generic" },
@@ -606,179 +608,192 @@ namespace FitReader
                       { 42, "rafting" },
                       { 43, "windsurfing" },
                       { 44, "kitesurfing" },
-                      { 254, "all" },
-                    },
+                      { 254, "all" }
+                    }
                   },
-  enumSubSport: {
-              new Dictionary<ushort, string>()
-    0: "generic",
-    1: "treadmill",
-    2: "street",
-    3: "trail",
-    4: "track",
-    5: "spin",
-    6: "indoorCycling",
-    7: "road",
-    8: "mountain",
-    9: "downhill",
-    10: "recumbent",
-    11: "cyclocross",
-    12: "handCycling",
-    13: "trackCycling",
-    14: "indoorRowing",
-    15: "elliptical",
-    16: "stairClimbing",
-    17: "lapSwimming",
-    18: "openWater",
-    19: "flexibilityTraining",
-    20: "strengthTraining",
-    21: "warmUp",
-    22: "match",
-    23: "exercise",
-    24: "challenge",
-    25: "indoorSkiing",
-    26: "cardioTraining",
-    27: "indoorWalking",
-    28: "eBikeFitness",
-    29: "bmx",
-    30: "casualWalking",
-    31: "speedWalking",
-    32: "bikeToRunTransition",
-    33: "runToBikeTransition",
-    34: "swimToBikeTransition",
-    35: "atv",
-    36: "motocross",
-    37: "backcountry",
-    38: "resort",
-    39: "rcDrone",
-    40: "wingsuit",
-    41: "whitewater",
-    42: "skateSkiing",
-    43: "yoga",
-    44: "pilates",
-    45: "indoorRunning",
-    46: "gravelCycling",
-    47: "eBikeMountain",
-    48: "commuting",
-    254: "all",
+  { "enumSubSport", new Dictionary<ushort, string>()
+  {
+    { 0, "generic" },
+    { 1, "treadmill" },
+    { 2, "street" },
+    { 3, "trail" },
+    { 4, "track" },
+    { 5, "spin" },
+    { 6, "indoorCycling" },
+    { 7, "road" },
+    { 8, "mountain" },
+    { 9, "downhill" },
+    { 10, "recumbent" },
+    { 11, "cyclocross" },
+    { 12, "handCycling" },
+    { 13, "trackCycling" },
+    { 14, "indoorRowing" },
+    { 15, "elliptical" },
+    { 16, "stairClimbing" },
+    { 17, "lapSwimming" },
+    { 18, "openWater" },
+    { 19, "flexibilityTraining" },
+    { 20, "strengthTraining" },
+    { 21, "warmUp" },
+    { 22, "match" },
+    { 23, "exercise" },
+    { 24, "challenge" },
+    { 25, "indoorSkiing" },
+    { 26, "cardioTraining" },
+    { 27, "indoorWalking" },
+    { 28, "eBikeFitness" },
+    { 29, "bmx" },
+    { 30, "casualWalking" },
+    { 31, "speedWalking" },
+    { 32, "bikeToRunTransition" },
+    { 33, "runToBikeTransition" },
+    { 34, "swimToBikeTransition" },
+    { 35, "atv" },
+    { 36, "motocross" },
+    { 37, "backcountry" },
+    { 38, "resort" },
+    { 39, "rcDrone" },
+    { 40, "wingsuit" },
+    { 41, "whitewater" },
+    { 42, "skateSkiing" },
+    { 43, "yoga" },
+    { 44, "pilates" },
+    { 45, "indoorRunning" },
+    { 46, "gravelCycling" },
+    { 47, "eBikeMountain" },
+    { 48, "commuting" },
+    { 254, "all" }
+  }
   },
-  enumSessionTrigger: {
-              new Dictionary<ushort, string>()
-    0: "activityEnd",
-    1: "manual",
-    2: "autoMultiSport",
-    3: "fitnessEquipment",
+  { "enumSessionTrigger", new Dictionary<ushort, string>()
+  {
+    { 0, "activityEnd" },
+    { 1, "manual" },
+    { 2, "autoMultiSport" },
+    { 3, "fitnessEquipment" },
+  }
   },
-  enumActivity: {
-              new Dictionary<ushort, string>()
-    0: "manual",
-    1: "autoMultiSport",
+  { "enumActivity", new Dictionary<ushort, string>()
+  {
+    { 0, "manual" },
+    { 1, "autoMultiSport" },
+  }
   },
-  antplusDeviceType: {
-              new Dictionary<ushort, string>()
-    1: "antfs",
-    11: "bikePower",
-    12: "environmentSensorLegacy",
-    15: "multiSportSpeedDistance",
-    16: "control",
-    17: "fitnessEquipment",
-    18: "bloodPressure",
-    19: "geocacheNode",
-    20: "lightElectricVehicle",
-    25: "envSensor",
-    26: "racquet",
-    27: "controlHub",
-    31: "muscleOxygen",
-    35: "bikeLightMain",
-    36: "bikeLightShared",
-    38: "exd",
-    40: "bikeRadar",
-    119: "weightScale",
-    120: "heartRate",
-    121: "bikeSpeedCadence",
-    122: "bikeCadence",
-    123: "bikeSpeed",
-    124: "strideSpeedDistance",
+  { "antplusDeviceType", new Dictionary<ushort, string>()
+  {
+    { 1, "antfs" },
+    { 11, "bikePower" },
+    { 12, "environmentSensorLegacy" },
+    { 15, "multiSportSpeedDistance" },
+    { 16, "control" },
+    { 17, "fitnessEquipment" },
+    { 18, "bloodPressure" },
+    { 19, "geocacheNode" },
+    { 20, "lightElectricVehicle" },
+    { 25, "envSensor" },
+    { 26, "racquet" },
+    { 27, "controlHub" },
+    { 31, "muscleOxygen" },
+    { 35, "bikeLightMain" },
+    { 36, "bikeLightShared" },
+    { 38, "exd" },
+    { 40, "bikeRadar" },
+    { 119, "weightScale" },
+    { 120, "heartRate" },
+    { 121, "bikeSpeedCadence" },
+    { 122, "bikeCadence" },
+    { 123, "bikeSpeed" },
+    { 124, "strideSpeedDistance" }
+  }
   },
-  enumSwimStroke: {
-              new Dictionary<ushort, string>()
-    0: "freestyle",
-    1: "backstroke",
-    2: "breastroke",
-    3: "butterfly",
-    4: "drill",
-    5: "mixed",
-    6: "im",
+  { "enumSwimStroke", new Dictionary<ushort, string>()
+  {
+    { 0, "freestyle" },
+    { 1, "backstroke" },
+    { 2, "breastroke" },
+    { 3, "butterfly" },
+    { 4, "drill" },
+    { 5, "mixed" },
+    { 6, "im" }
+  }
   },
-  enumLengthType: {
-              new Dictionary<ushort, string>()
-    0: "idle",
-    1: "active",
+  { "enumLengthType", new Dictionary<ushort, string>()
+  {
+    { 0, "idle" },
+    { 1, "active" },
+  }
   },
-  enumTimeMode: {
-              new Dictionary<ushort, string>()
-    0: "hour12",
-    1: "hour24",
-    2: "military",
-    3: "hour12WithSeconds",
-    4: "hour24WithSeconds",
-    5: "utc",
+  { "enumTimeMode", new Dictionary<ushort, string>()
+  {
+    { 0, "hour12" },
+    { 1, "hour24" },
+    { 2, "military" },
+    { 3, "hour12WithSeconds" },
+    { 4, "hour24WithSeconds" },
+    { 5, "utc" },
+  }
   },
-  enumBacklightMode: {
-              new Dictionary<ushort, string>()
-    0: "off",
-    1: "manual",
-    2: "kayAndMessages",
-    3: "autoBrightness",
-    4: "smartNotifications",
-    5: "keyAndMessagesNight",
-    6: "keyAndMessagesAndSmartNotifications",
+  { "enumBacklightMode", new Dictionary<ushort, string>()
+  {
+    { 0, "off" },
+    { 1, "manual" },
+    { 2, "kayAndMessages" },
+    { 3, "autoBrightness" },
+    { 4, "smartNotifications" },
+    { 5, "keyAndMessagesNight" },
+    { 6, "keyAndMessagesAndSmartNotifications" },
+  }
   },
-  enumDateMode: {
-              new Dictionary<ushort, string>()
-    0: "dayMonth",
-    1: "monthDay",
+  { "enumDateMode", new Dictionary<ushort, string>()
+  {
+    { 0, "dayMonth" },
+    { 1, "monthDay" },
+  }
   },
-  enumDisplayOrientation: {
-              new Dictionary<ushort, string>()
-    0: "auto",
-    1: "portrait",
-    2: "landscape",
-    3: "portraitFlipped",
-    4: "landscapeFlipped",
-  },
-  enumSide: {
-              new Dictionary<ushort, string>()
-    0: "right",
-    1: "left",
-  },
-  enumAutoSyncFrequency: {
-              new Dictionary<ushort, string>()
-    0: "never",
-    1: "occasionally",
-    2: "frequent",
-    3: "onceADay",
-    4: "remote",
-  },
-  enumAutoActivityDetect: {
-              new Dictionary<ushort, string>()
-    0: "none",
-    1: "running",
-    2: "cycling",
-    4: "swimming",
-    8: "walking",
-    32: "elliptical",
-    1024: "sedentary",
-  },
-  enumSwitch: {
-              new Dictionary<ushort, string>()
-    0: "off",
-    1: "on",
-    2: "auto",
-  },
+{ "enumDisplayOrientation", new Dictionary<ushort, string>()
+{
+    { 0, "auto" },
+    { 1, "portrait" },
+    { 2, "landscape" },
+    { 3, "portraitFlipped" },
+    { 4, "landscapeFlipped" },
+  }
+},
+{ "enumSide", new Dictionary<ushort, string>()
+{
+    { 0, "right" },
+    { 1, "left" },
+  }
+},
+{ "enumAutoSyncFrequency", new Dictionary<ushort, string>()
+{
+    { 0, "never" },
+    { 1, "occasionally" },
+    { 2, "frequent" },
+    { 3, "onceADay" },
+    { 4, "remote" },
+  }
+},
+{ "enumAutoActivityDetect", new Dictionary<ushort, string>()
+{
+    { 0, "none" },
+    { 1, "running" },
+    { 2, "cycling" },
+    { 4, "swimming" },
+    { 8, "walking" },
+    { 32, "elliptical" },
+    { 1024, "sedentary" },
+  }
+},
+  { "enumSwitch", new Dictionary<ushort, string>()
+  {
+    { 0, "off" },
+    { 1, "on" },
+    { 2, "auto" }
+  }
+  }
 };
 
-        };
         internal static Dictionary<string, Dictionary<ushort, string>> _Enums { get => enums; }
     }
 }
