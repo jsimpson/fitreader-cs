@@ -5,7 +5,7 @@ namespace FitReader
     internal class DataField
     {
         internal bool valid = false;
-        internal object data;
+        internal dynamic data;
         public DataField(EndianBinaryReader binaryReader, Dictionary<string, byte> opts)
         {
             var baseNum = opts["baseNum"];
@@ -30,7 +30,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadUInt8();
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -45,7 +45,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadInt8();
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -61,7 +61,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadUInt16(littleEndian);
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -76,7 +76,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadInt16(littleEndian);
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -92,7 +92,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadUInt32(littleEndian);
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -107,7 +107,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadInt32(littleEndian);
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -122,7 +122,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadFloat(littleEndian);
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -137,7 +137,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadFloat64(littleEndian);
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -153,7 +153,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadUInt64(littleEndian);
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -168,7 +168,7 @@ namespace FitReader
                         {
                             data[i] = binaryReader.ReadInt64(littleEndian);
                         }
-                        this.data = (object)data;
+                        this.data = data;
                     }
                     else
                     {
@@ -186,30 +186,33 @@ namespace FitReader
             this.valid = check(baseType.invalidValue);
         }
 
-        private bool check(object invalidValue)
+        private bool check(dynamic invalidValue)
         {
             var name = this.data.GetType().Name;
             if (name == "Byte[]" ||
                 name == "SByte[]" ||
-                name == "UShort[]" ||
-                name == "Short[]" ||
+                name == "UInt16[]" ||
+                name == "Int16[]" ||
                 name == "UInt[]" ||
                 name == "Int[]" ||
                 name == "Single[]" ||
                 name == "Double[]" ||
-                name == "ULong[]" ||
-                name == "Long[]" ||
+                name == "UInt32[]" ||
+                name == "Int32[]" ||
                 name == "Char[]"
             )
             {
-                // Is there a better way to handle this?
-                foreach(var d in (dynamic)this.data)
+                List<dynamic> valid = new List<dynamic>();
+                foreach (var d in this.data)
                 {
-                    if ((object)d != invalidValue)
+                    if (d != invalidValue)
                     {
-                        return true;
+                        // TODO: This sucks, fix it.
+                        valid.Add(d);
                     }
                 }
+
+                return valid.Count > 0;
             }
 
             return this.data != invalidValue;

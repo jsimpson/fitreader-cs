@@ -36,12 +36,7 @@ namespace FitReader
                 {
                     DefinitionRecord definitionRecord = definitions[recordHeader.localMessageType];
                     DataRecord dataRecord = new DataRecord(binaryReader, definitionRecord);
-
-                    // 206 is developer field definitions, skip processing
-                    if (definitionRecord.GlobalMsgNum != 206)
-                    {
-                        definitionRecord.dataRecords.Add(dataRecord);
-                    }
+                    definitionRecord.dataRecords.Add(dataRecord);
                 }
             }
 
@@ -69,7 +64,7 @@ namespace FitReader
             {
                 foreach (var definition in entry.Value)
                 {
-                    var message = new Message(entry.Key, definition);
+                    var message = new Message(definition);
                     if (message.Name != null)
                     {
                         this.messages.Add(message);

@@ -3,14 +3,14 @@ namespace FitReader
     internal class Field
     {
         public string name;
-        public string type;
-        public object scale;
-        public object offset;
+        public string baseType;
+        public dynamic scale;
+        public dynamic offset;
 
-        public Field(string name, string type, object scale, object offset)
+        public Field(string name, string baseType, object scale, object offset)
         {
             this.name = name;
-            this.type = type;
+            this.baseType = baseType;
             this.scale = scale;
             this.offset = offset;
         }

@@ -7,7 +7,6 @@ namespace FitReader
     {
         internal ushort globalMsgNum;
         private List<Dictionary<byte, DataField>> fields;
-        private List<Dictionary<byte, DataField>> devFields;
         public DataRecord(EndianBinaryReader binaryReader, DefinitionRecord definitionRecord)
         {
             this.globalMsgNum = definitionRecord.GlobalMsgNum;

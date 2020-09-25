@@ -38,15 +38,5 @@ namespace FitReader
         {
             return this.headerType == 0 && this.messageType == 0;
         }
-
-        public bool hasDevFields()
-        {
-            return this.messageTypeSpecific == 1;
-        }
-
-        public bool hasTimestamp()
-        {
-            return this.headerType == 1;
-        }
     }
 }
