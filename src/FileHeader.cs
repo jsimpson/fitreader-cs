@@ -19,7 +19,11 @@ namespace FitReader
 
             this.dataType = binaryReader.ReadChars(4);
 
-            this.crc = binaryReader.ReadUInt16(true);
+            // 12-byte file headers will not have a header CRC.
+            if (this.size == 14)
+            {
+                this.crc = binaryReader.ReadUInt16(true);
+            }
         }
     }
 }

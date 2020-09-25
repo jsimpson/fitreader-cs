@@ -23,6 +23,17 @@ namespace FitReader
             this.binaryReader = new BinaryReader(input);
         }
 
+        public void Seek(int position)
+        {
+            if (position > this.binaryReader.BaseStream.Length)
+            {
+                return;
+            }
+
+            this.binaryReader.BaseStream.Seek(position, SeekOrigin.Begin);
+            this.position = position;
+        }
+
         public char[] ReadChars(int length)
         {
             this.position += length;

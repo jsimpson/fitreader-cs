@@ -14,6 +14,11 @@ namespace FitReader
         {
             this.fileHeader = new FileHeader(binaryReader);
 
+            if (!validate(binaryReader))
+            {
+                throw new Exception();
+            }
+
             while (binaryReader.Position < (this.fileHeader.dataSize + this.fileHeader.size))
             {
                 RecordHeader recordHeader = new RecordHeader(binaryReader);
@@ -71,6 +76,39 @@ namespace FitReader
                     }
                 }
             }
+        }
+
+        private bool validate(EndianBinaryReader binaryReader)
+        {
+            if (this.fileHeader.size == 14)
+            {
+                binaryReader.Seek(0);
+
+                var crc = Crc.Calculate(binaryReader, 0, 12);
+                if (crc != this.fileHeader.crc)
+                {
+                    return false;
+                }
+
+                binaryReader.Seek(14);
+            }
+
+            var fileCrcPosition = this.fileHeader.size + (int)this.fileHeader.dataSize;
+            binaryReader.Seek(fileCrcPosition);
+
+            var fileCrc = binaryReader.ReadUInt8() + (binaryReader.ReadUInt8() << 8);
+
+            var start = this.fileHeader.size == 12 ? 0 : this.fileHeader.size;
+            binaryReader.Seek(start);
+
+            if (fileCrc != Crc.Calculate(binaryReader, start, fileCrcPosition))
+            {
+                return false;
+            }
+
+            binaryReader.Seek(this.fileHeader.size);
+
+            return true;
         }
     }
 }
