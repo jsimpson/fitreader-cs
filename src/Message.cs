@@ -24,18 +24,32 @@ namespace FitReader
                     {
                         foreach (var dataField in dataRecord.valid())
                         {
-                            processValue(fields[dataRecord.globalMsgNum], dataField[1]);
+                            if (fields.ContainsKey(dataRecord.globalMsgNum))
+                            {
+                                processValue(fields[dataRecord.globalMsgNum], dataField.Value.data);
+                            }
                         }
                     }
                 }
             }
         }
 
-        private void processValue(Field field, DataField dataField)
+        private void processValue(Field field, object value)
         {
-            if (field.type.Substring(0, 4).Equals("enum"))
+            if ((field.type.Length >= 4) && (field.type.Substring(0, 4).Equals("enum")))
             {
-                var value = dataField.data;
+                if (Enums._Enums.ContainsKey(field.type))
+                {
+                    value = Enums._Enums[field.type][(ushort)value];
+                }
+            }
+            else if (field.type.Equals("dateTime") || field.type.Equals("localDateTime"))
+            {
+                var a = 1;
+            }
+            else if (field.type.Equals("coordinates"))
+            {
+                value = (double)value * 180.0 / Math.Pow(2, 31);
             }
         }
 

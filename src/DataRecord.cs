@@ -13,7 +13,7 @@ namespace FitReader
             this.globalMsgNum = definitionRecord.GlobalMsgNum;
             this.fields = new List<Dictionary<byte, DataField>>();
 
-            foreach(FieldDefinition fieldDefinition in definitionRecord.FieldDefinitions)
+            foreach (FieldDefinition fieldDefinition in definitionRecord.FieldDefinitions)
             {
                 var opts = new Dictionary<string, byte>()
                 {
@@ -28,18 +28,21 @@ namespace FitReader
             }
         }
 
-        internal List<Dictionary<byte, DataField>> valid()
+        internal List<KeyValuePair<byte, DataField>> valid()
         {
-            var valid = new List<Dictionary<byte, DataField>>();
+            var valid = new List<KeyValuePair<byte, DataField>>();
 
-            foreach(var field in fields)
+            foreach (var field in fields)
             {
-                if (field[1].valid)
+                foreach (KeyValuePair<byte, DataField> dataField in field)
                 {
-                   valid.Add(field) ;
+                    if (dataField.Value.valid)
+                    {
+                        valid.Add(new KeyValuePair<byte, DataField>(dataField.Key, dataField.Value));
+                    }
                 }
             }
-            
+
             return valid;
         }
     }

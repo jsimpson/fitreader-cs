@@ -41,9 +41,12 @@ namespace FitReader
                 var fields = Fields._Fields[this.globalMsgNum];
                 foreach (var dataRecord in this.dataRecords)
                 {
-                    foreach (var dataFields in dataRecord.valid())
+                    foreach (var dataField in dataRecord.valid())
                     {
-                        var a = 1;
+                        if (fields.ContainsKey(dataField.Key))
+                        {
+                            valid.Add(dataRecord);
+                        }
                     }
                 }
             }
