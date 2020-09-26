@@ -29,6 +29,10 @@ namespace FitReader
                                 var data = processValue(field, dataField.Value.data);
                                 this.data[field.name] = data;
                             }
+                            else
+                            {
+                                var a = 1;
+                            }
                         }
                     }
                 }

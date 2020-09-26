@@ -6,6 +6,7 @@ namespace FitReader
     {
         private static Dictionary<ushort, Dictionary<ushort, Field>> fields = new Dictionary<ushort, Dictionary<ushort, Field>>()
         {
+            // Message Capabilities
             { 0, new Dictionary<ushort, Field>()
                 {
                     { 0, new Field("filetype", "enumFile", 0, 0) },
@@ -17,6 +18,7 @@ namespace FitReader
                     { 8, new Field("productName", "raw", 0, 0) }
                 }
             },
+            // Device Settings
             { 2, new Dictionary<ushort, Field>()
                 {
                     { 0, new Field("activityTimeZone", "unit8", 0, 0) },
@@ -43,6 +45,7 @@ namespace FitReader
                     { 134, new Field("tapInterface", "enumSwitch", 0, 0) }
               }
             },
+            // User Profile
             { 3, new Dictionary<ushort, Field>()
                 {
                     { 254, new Field("messageIndex", "messageIndex", 0, 0) },
@@ -67,9 +70,16 @@ namespace FitReader
                     { 21, new Field("temperatureSetting", "enumDisplayMeasure", 0, 0) },
                     { 22, new Field("localId", "userLocalId", 0, 0) },
                     { 23, new Field("globalId", "byte", 0, 0) },
-                    { 30, new Field("heightSetting", "enumDisplayMeasure", 0, 0) }
+                    { 28, new Field("wakeTime", "dateTime", 0, 0) },
+                    { 29, new Field("sleepTime", "dateTime", 0, 0) },
+                    { 30, new Field("heightSetting", "enumDisplayMeasure", 0, 0) },
+                    //{ 31, new Field("userRunningStepLength") }
+                    //{ 32, new Field("userWalkingStepLength") }
+                    { 47, new Field("depthSetting", "uint32", 0, 0) },
+                    { 49, new Field("diveCount", "uint32", 0, 0) }
                 }
             },
+            // Bike Profile
             { 6, new Dictionary<ushort, Field>()
                 {
                     { 254, new Field("messageIndex", "messageIndex", 0, 0) },
@@ -100,6 +110,7 @@ namespace FitReader
                     { 24, new Field("bikePowerAntIdTransType", "uint8z", 0, 0) }
                 }
             },
+            // Zones Target
             { 7, new Dictionary<ushort, Field>()
                 {
                     { 1, new Field("maxHeartRate", "uint8", 0, 0) },
@@ -109,6 +120,7 @@ namespace FitReader
                     { 7, new Field("pwrCalcType", "pwrZoneCalc", 0, 0) },
                 }
             },
+            // Session
             { 18, new Dictionary<ushort, Field>()
                 {
                     { 254, new Field("messageIndex", "messageIndex", 0, 0) },
@@ -228,6 +240,7 @@ namespace FitReader
                     { 131, new Field("levBatteryConsumption", "uint8", 2, 0) }
                 }
             },
+            // Lap
             { 19, new Dictionary<ushort, Field>()
                 {
                     { 254, new Field("messageIndex", "messageIndex", 0, 0) },
@@ -340,6 +353,7 @@ namespace FitReader
                     { 117, new Field("levBatteryConsumption", "uint8", 2, 0) }
                 }
             },
+            // Record
             { 20, new Dictionary<ushort, Field>()
                 {
                     { 253, new Field("timestamp", "dateTime", 0, 0) },
@@ -400,6 +414,7 @@ namespace FitReader
                     { 82, new Field("motorPower", "uint16", 0, 0) }
                 }
             },
+            // Event
             { 21, new Dictionary<ushort, Field>()
                 {
                     { 253, new Field("timestamp", "dateTime", 0, 0) },
@@ -427,6 +442,7 @@ namespace FitReader
                     { 4, new Field("heart", "deviceIndex", 0, 0) }
                 }
             },
+            // Device Info
             { 23, new Dictionary<ushort, Field>()
                 {
                     { 253, new Field("timestamp", "dateTime", 0, 0) },
@@ -451,6 +467,7 @@ namespace FitReader
                     { 27, new Field("productName", "string", 0, 0) }
                 }
             },
+            // Activity
             { 34, new Dictionary<ushort, Field>()
                 {
                     { 253, new Field("timestamp", "dateTime", 0, 0) },
@@ -463,6 +480,7 @@ namespace FitReader
                     { 6, new Field("eventGroup", "uint8", 0, 0) }
                 }
             },
+            // File Creator
             { 49, new Dictionary<ushort, Field>()
                 {
                     { 0, new Field("softwareVersion", "uint16", 0, 0) },
@@ -595,19 +613,6 @@ namespace FitReader
                     { 80, new Field("maxPowerPosition", "uint16", 0, 0) },
                     { 81, new Field("avgCadencePosition", "uint8", 0, 0) },
                     { 82, new Field("maxCadencePosition", "uint8", 0, 0) }
-                }
-            },
-            { 147, new Dictionary<ushort, Field>()
-                {
-                    { 0, new Field("serialNumber", "raw", 0, 0) },
-                    { 2, new Field("name", "raw", 0, 0) },
-                    { 17, new Field("numFrontGears", "raw", 0, 0) },
-                    { 18, new Field("frontGears", "raw", 0, 0) },
-                    { 19, new Field("numBackGears", "raw", 0, 0) },
-                    { 20, new Field("backGears", "raw", 0, 0) },
-                    { 32, new Field("product", "raw", 0, 0) },
-                    { 34, new Field("softwareVersion", "raw", 0, 0) },
-                    { 254, new Field("messageIndex", "messageIndex", 0, 0) }
                 }
             }
         };

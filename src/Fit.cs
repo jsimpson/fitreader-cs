@@ -8,7 +8,7 @@ namespace FitReader
         internal List<DefinitionRecord> finished = new List<DefinitionRecord>();
         internal Dictionary<ushort, DefinitionRecord> definitions = new Dictionary<ushort, DefinitionRecord>();
         internal FileHeader fileHeader { get; }
-        internal List<Message> messages { get; } = new List<Message>();
+        internal Dictionary<string, List<Message>> messages { get; } = new Dictionary<string, List<Message>>();
 
         public Fit(EndianBinaryReader binaryReader)
         {
@@ -62,13 +62,25 @@ namespace FitReader
 
             foreach (KeyValuePair<ushort, List<DefinitionRecord>> entry in grouped)
             {
+                var messages = new List<Message>();
+                string name = null;
                 foreach (var definition in entry.Value)
                 {
                     var message = new Message(definition);
                     if (message.Name != null)
                     {
-                        this.messages.Add(message);
+                        if (name == null)
+                        {
+                            name = message.Name;
+                        }
+
+                        messages.Add(message);
                     }
+                }
+
+                if (name != null)
+                {
+                    this.messages[name] = messages;
                 }
             }
         }

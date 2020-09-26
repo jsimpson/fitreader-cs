@@ -47,8 +47,16 @@ namespace FitReader
                         {
                             valid.Add(dataRecord);
                         }
+                        else
+                        {
+                            var a = 1;
+                        }
                     }
                 }
+            }
+            else
+            {
+                var a = 1;
             }
 
             return valid;
