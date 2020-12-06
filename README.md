@@ -1,4 +1,4 @@
-# fitreader-cs
+# fitreader-csharp
 
 WIP!
 
